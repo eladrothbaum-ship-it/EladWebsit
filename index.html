@@ -1,174 +1,1112 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>אלעד רוטבאום | ייעוץ אסטרטגי</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>אלעד רוטבאום | ייעוץ אסטרטגי לפוליטיקאים ואנשי ציבור</title>
+  <meta
+    name="description"
+    content="אלעד רוטבאום - ייעוץ אסטרטגי לפוליטיקאים ואנשי ציבור: מסרים, הכנה לראיונות, דפי מסרים, תגובות מהירות וניטור תקשורתי."
+  />
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap");
+
+    :root {
+      --bg: #07111f;
+      --bg-2: #0b1729;
+      --panel: rgba(14, 25, 44, 0.84);
+      --panel-strong: rgba(10, 20, 36, 0.96);
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #edf3ff;
+      --muted: #a7b7d6;
+      --soft: #d9e4f8;
+      --accent: #d4af37;
+      --accent-2: #f2d27a;
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+      --radius: 28px;
+      --max: 1240px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #020617;
-      color: #e5e7eb;
+      font-family: "Heebo", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(212, 175, 55, 0.08), transparent 18%),
+        radial-gradient(circle at 88% 10%, rgba(89, 124, 255, 0.10), transparent 24%),
+        linear-gradient(180deg, #040a14 0%, #08111f 38%, #091423 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.55), transparent 92%);
+      opacity: 0.14;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0 70px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 22px;
+      margin-bottom: 26px;
+      border-radius: 26px;
+      background: rgba(7, 15, 29, 0.76);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      font-weight: 900;
+      color: #08101f;
+      background: linear-gradient(180deg, var(--accent-2), var(--accent));
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.25);
+      flex: 0 0 auto;
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    .brand-sub {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      color: #06101d;
+      background: linear-gradient(180deg, var(--accent-2), var(--accent));
+      box-shadow: 0 16px 38px rgba(212, 175, 55, 0.18);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-panel,
+    .card {
+      background: linear-gradient(180deg, rgba(13, 24, 42, 0.94), rgba(8, 17, 31, 0.98));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 34px;
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 36px 34px 34px;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff2c5;
+      background: rgba(212, 175, 55, 0.10);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(42px, 6vw, 86px);
+      line-height: 0.95;
+      letter-spacing: -1.8px;
+      font-weight: 900;
+      max-width: 780px;
+    }
+
+    .accent {
+      color: var(--accent-2);
+    }
+
+    .hero-lead {
+      margin: 0 0 16px;
+      font-size: 24px;
+      line-height: 1.7;
+      color: var(--soft);
+      max-width: 780px;
+    }
+
+    .hero-sub {
+      margin: 0 0 28px;
+      font-size: 18px;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 740px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .mini-stat {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 15px;
+      color: #fff3ce;
+      margin-bottom: 6px;
+    }
+
+    .mini-stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
       line-height: 1.6;
     }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 24px;
+    .hero-visual {
+      display: grid;
+      grid-template-rows: 1.1fr 0.9fr;
+      gap: 14px;
+      padding: 14px;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(212, 175, 55, 0.10), transparent 26%),
+        linear-gradient(180deg, rgba(12, 22, 39, 0.98), rgba(8, 16, 30, 0.98));
     }
 
-    h1 {
-      font-size: 40px;
-      font-weight: 800;
+    .main-portrait {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      min-height: 410px;
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    h2 {
-      font-size: 26px;
-      margin-top: 50px;
+    .main-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    p {
-      font-size: 18px;
-      color: #9ca3af;
+    .portrait-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 22px;
+      background: linear-gradient(to top, rgba(4,8,18,0.96), rgba(4,8,18,0));
+    }
+
+    .portrait-name {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .portrait-role {
+      color: #cdd9f0;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .thumbs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .thumb-card {
+      position: relative;
+      min-height: 200px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .thumb-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(4,8,18,0.82), rgba(4,8,18,0.05));
+    }
+
+    .thumb-label {
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      left: 16px;
+      z-index: 1;
+      font-size: 15px;
+      font-weight: 700;
+      color: #f4f7ff;
     }
 
     .section {
-      margin-top: 30px;
-      padding: 24px;
-      background: #0f172a;
-      border-radius: 16px;
+      margin-top: 22px;
     }
 
-    .cta {
-      margin-top: 60px;
-      text-align: center;
+    .section-head {
+      margin-bottom: 16px;
     }
 
-    .cta button {
-      background: white;
-      color: black;
-      border: none;
-      padding: 16px 28px;
-      font-size: 18px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: bold;
+    .kicker {
+      color: #f1d487;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-weight: 800;
     }
 
-    .links {
-      margin-top: 20px;
-      text-align: center;
+    .section h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.05;
+      font-weight: 900;
     }
 
-    .links a {
-      display: block;
-      color: #60a5fa;
-      text-decoration: none;
+    .problem-solution {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .card-body {
+      padding: 30px;
+    }
+
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+
+    .card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .service {
+      padding: 24px 20px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(13, 24, 42, 0.96), rgba(9, 17, 31, 0.98));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      font-size: 22px;
+      color: #08101d;
+      background: linear-gradient(180deg, var(--accent-2), var(--accent));
+      font-weight: 900;
+    }
+
+    .service h3 {
+      margin: 0 0 10px;
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .service p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .process-why {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #07111f;
+      background: linear-gradient(180deg, var(--accent-2), var(--accent));
+    }
+
+    .step-text {
+      color: var(--soft);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 12px;
       margin-top: 8px;
     }
 
+    .bullet {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.05);
+      color: var(--soft);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .background-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 22px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .timeline-item {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .timeline-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 17px;
+      color: #fff2c5;
+    }
+
+    .timeline-item span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .social-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.05);
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .social-top strong {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .social-top p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .social-link {
+      margin-top: 18px;
+      color: #fff2c5;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .gallery-section .section-head p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.9;
+      max-width: 860px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .video-card {
+      position: relative;
+      min-height: 340px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, rgba(13, 24, 42, 0.96), rgba(9, 17, 31, 0.98));
+    }
+
+    .video-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.02) contrast(1.03);
+    }
+
+    .video-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(4,8,18,0.95), rgba(4,8,18,0.18));
+    }
+
+    .video-content {
+      position: absolute;
+      inset: auto 0 0 0;
+      z-index: 1;
+      padding: 18px;
+    }
+
+    .video-tag {
+      display: inline-flex;
+      min-height: 32px;
+      align-items: center;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.16);
+      border: 1px solid rgba(212, 175, 55, 0.24);
+      color: #fff2c5;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .video-content h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .video-content p {
+      margin: 0 0 14px;
+      color: #d6e0f2;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .video-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff2c5;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .cta {
+      margin-top: 22px;
+    }
+
+    .cta-box {
+      padding: 34px;
+      border-radius: 34px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(212,175,55,0.08), transparent 22%),
+        linear-gradient(180deg, rgba(13, 24, 42, 0.96), rgba(9, 17, 31, 0.99));
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .cta-box h2 {
+      margin: 0 0 14px;
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: 1;
+    }
+
+    .cta-box p {
+      margin: 0 auto 24px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.9;
+      max-width: 820px;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      color: #8fa3c8;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .problem-solution,
+      .process-why,
+      .background-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .wrap {
+        width: min(100% - 18px, 100%);
+        padding-top: 10px;
+        padding-bottom: 48px;
+      }
+
+      .topbar {
+        padding: 14px;
+        border-radius: 22px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-actions {
+        width: 100%;
+        justify-content: stretch;
+      }
+
+      .nav-actions .btn {
+        width: 100%;
+      }
+
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+      }
+
+      .brand-name {
+        font-size: 17px;
+      }
+
+      .brand-sub {
+        font-size: 10px;
+        letter-spacing: 1.4px;
+      }
+
+      .hero-copy,
+      .card-body,
+      .cta-box {
+        padding: 22px 18px;
+      }
+
+      .hero h1 {
+        font-size: clamp(38px, 13vw, 58px);
+        line-height: 0.98;
+      }
+
+      .hero-lead {
+        font-size: 18px;
+      }
+
+      .hero-sub,
+      .card p,
+      .cta-box p {
+        font-size: 16px;
+      }
+
+      .main-portrait {
+        min-height: 360px;
+      }
+
+      .thumb-card {
+        min-height: 160px;
+      }
+
+      .thumbs,
+      .social-grid,
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .video-card {
+        min-height: 300px;
+      }
+
+      .cta-actions {
+        flex-direction: column;
+      }
+
+      .cta-actions .btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">ER</div>
+        <div class="brand-text">
+          <div class="brand-name">אלעד רוטבאום</div>
+          <div class="brand-sub">Strategic Advisory • Politics • Media</div>
+        </div>
+      </div>
 
-<div class="container">
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="https://www.instagram.com/eladrothbaum/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a class="btn btn-ghost" href="https://www.tiktok.com/@eladrothbaum12" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <a class="btn btn-gold" href="mailto:eladrothbaum@gmail.com">צור קשר</a>
+      </div>
+    </header>
 
-  <!-- HERO -->
-  <h1>מי שלא מנהל את הזירה — מנוהל על ידה.</h1>
-  <p>
-    ייעוץ אסטרטגי לפוליטיקאים ואנשי ציבור שלא מוכנים לאבד שליטה על התדמית שלהם.
-  </p>
+    <section class="hero">
+      <div class="hero-panel hero-copy">
+        <div class="eyebrow">ייעוץ אסטרטגי לפוליטיקאים ואנשי ציבור</div>
 
-  <!-- PROBLEM -->
-  <div class="section">
-    <h2>הבעיה</h2>
-    <p>
-      אמירה אחת לא מדויקת — והכותרת כבר נגדך.  
-      תגובה לא נכונה — והנרטיב בורח.
-    </p>
-    <p>
-      בזירה ציבורית אין זמן לחשוב בדיעבד.  
-      מי שלא מגדיר את המסר — אחרים יעשו את זה במקומו.
-    </p>
+        <h1>
+          מי שלא <span class="accent">מנהל את הזירה</span><br />
+          מנוהל על ידה.
+        </h1>
+
+        <p class="hero-lead">
+          ייעוץ אסטרטגי לפוליטיקאים, נבחרי ציבור ואנשים שנמצאים תחת עין תקשורתית קבועה — ורוצים לשלוט במסר, בתדמית ובתגובה.
+        </p>
+
+        <p class="hero-sub">
+          בזירה הציבורית, אמירה אחת חלשה, תגובה מאוחרת או ניסוח לא מדויק יכולים להפוך לכותרת, משבר או נזק תדמיתי. אני עובד על החשיבה, על החידוד ועל מה שנאמר בפועל — לפני שזה יוצא החוצה.
+        </p>
+
+        <div class="nav-actions">
+          <a class="btn btn-gold" href="mailto:eladrothbaum@gmail.com">בוא נדבר</a>
+          <a class="btn btn-ghost" href="https://www.tiktok.com/@eladrothbaum12" target="_blank" rel="noopener noreferrer">צפה בניתוחים שלי</a>
+        </div>
+
+        <div class="hero-grid">
+          <div class="mini-stat">
+            <strong>שליטה במסר</strong>
+            <span>לפני ריאיון, לפני פוסט, לפני תגובה.</span>
+          </div>
+          <div class="mini-stat">
+            <strong>הבנת זירה</strong>
+            <span>פוליטיקה, תקשורת, רשתות והקשר ציבורי.</span>
+          </div>
+          <div class="mini-stat">
+            <strong>דיוק תחת לחץ</strong>
+            <span>כשאין זמן לטעויות ואין מקום לאלתור.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-panel hero-visual">
+        <div class="main-portrait">
+          <img src="image1.jpeg" alt="אלעד רוטבאום" />
+          <div class="portrait-overlay">
+            <div class="portrait-name">אלעד רוטבאום</div>
+            <div class="portrait-role">יועץ אסטרטגי • פוליטיקה • תקשורת • תדמית ציבורית</div>
+          </div>
+        </div>
+
+        <div class="thumbs">
+          <div class="thumb-card">
+            <img src="image2.jpeg" alt="אלעד בהופעה תקשורתית" />
+            <div class="thumb-label">ניסיון תקשורתי מבפנים</div>
+          </div>
+          <div class="thumb-card">
+            <img src="image3.jpeg" alt="אלעד בטלוויזיה" />
+            <div class="thumb-label">הבנה של מסר, מסך והשפעה</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section problem-solution">
+      <div class="card">
+        <div class="card-body">
+          <div class="kicker">The Problem</div>
+          <h3>איבוד שליטה קורה מהר.</h3>
+          <p>
+            בזירה הציבורית, לא צריך קריסה גדולה כדי להיפגע. מספיק ניסוח חלש, מסר מבולבל, תגובה מאוחרת או פוסט שלא מחזיק את הקו.
+          </p>
+          <p>
+            התקשורת לא מחכה, הרשת לא סולחת, והיריבים תמיד מוכנים למסגר את הסיפור לפניך.
+          </p>
+          <p>
+            מי שלא מגדיר את המסר שלו בזמן — נגרר אחרי המסר של אחרים.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="kicker">The Response</div>
+          <h3>פה נכנסת החשיבה.</h3>
+          <p>
+            אני לא מנהל עמודים. אני לא רודף אחרי טרנדים. אני לא מוכר “נוכחות”.
+          </p>
+          <p>
+            אני עובד על ההחלטה התקשורתית עצמה: מה לומר, איך לומר, מתי להגיב, ואיפה לא ליפול.
+          </p>
+          <p>
+            העבודה היא על חדות, שליטה, אמינות והשפעה — בדיוק איפה שהדברים באמת נקבעים.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="kicker">Services</div>
+        <h2>השירותים</h2>
+      </div>
+
+      <div class="services">
+        <div class="service">
+          <div class="service-icon">01</div>
+          <h3>ניסוח ושכתוב</h3>
+          <p>פוסטים, תגובות, הודעות ועמדות — לפני שהן יוצאות החוצה.</p>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">02</div>
+          <h3>דפי מסרים</h3>
+          <p>מסרים חדים, קו עקבי, שפה ברורה והחזקה של נרטיב.</p>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">03</div>
+          <h3>הכנה לראיונות</h3>
+          <p>שאלות צפויות, שאלות קשות, תשובות מדויקות והתנהלות נכונה בלחץ.</p>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">04</div>
+          <h3>ניטור תקשורתי</h3>
+          <p>מה אומרים, איך זה נתפס, איפה הסיכון ואיך נכון להגיב.</p>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">05</div>
+          <h3>תגובה למצבים רגישים</h3>
+          <p>מהירות, שיקול דעת וניסוח נכון כשאי אפשר להרשות לעצמך לטעות.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process-why">
+      <div class="card">
+        <div class="card-body">
+          <div class="kicker">How It Works</div>
+          <h3>איך זה עובד בפועל</h3>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-text">מבינים את הסיטואציה, הכוח הפוליטי, הזירה והסיכון.</div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-text">מגדירים מסר חד: מה חייב להיאמר, מה לא, ואיפה הקו.</div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-text">מנסחים, מדייקים ומכינים תגובה או הופעה תקשורתית.</div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-text">יוצאים החוצה בשליטה — ולא ברדיפה אחרי הנזק.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="kicker">Why Me</div>
+          <h3>למה לעבוד איתי</h3>
+          <div class="bullet-list">
+            <div class="bullet">אני מגיע מהמערכת עצמה — עיתונות, חדשות, צה"ל, כנסת, יחסי ציבור וקמפיינים.</div>
+            <div class="bullet">אני מבין גם את מי שמנסח, גם את מי ששואל, וגם את מי שמחפש כותרת.</div>
+            <div class="bullet">אני לא “מבצע תוכן”. אני עובד על החשיבה שמאחורי מה שנאמר.</div>
+            <div class="bullet">במקום שבו כל מילה נבחנת — אי אפשר לעבוד חובבני.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section background-grid">
+      <div class="card">
+        <div class="card-body">
+          <div class="kicker">Background</div>
+          <h3>רקע מקצועי</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <strong>עיתונאי ב"במחנה" ודובר צה"ל</strong>
+              <span>ניסיון ישיר בעבודה עם מסר, מערכת, ניסוח והבנת שיח ציבורי ותקשורתי.</span>
+            </div>
+
+            <div class="timeline-item">
+              <strong>תואר ראשון בממשל, דיפלומטיה ואסטרטגיה — אוניברסיטת רייכמן</strong>
+              <span>בסיס עומק להבנת כוח, מדיניות, תקשורת וקבלת החלטות בזירה הציבורית.</span>
+            </div>
+
+            <div class="timeline-item">
+              <strong>עוזר דובר בוועדת הכספים של הכנסת</strong>
+              <span>עבודה מתוך המערכת הפוליטית עצמה, לצד ניהול מסרים בזירה רגישה ורוויית עניין.</span>
+            </div>
+
+            <div class="timeline-item">
+              <strong>מעורבות בקמפיינים של פוליטיקאים וראשי ערים</strong>
+              <span>היכרות עם הצורך בדיוק, תגובה, תדמית והבנת מומנטום ציבורי.</span>
+            </div>
+
+            <div class="timeline-item">
+              <strong>ייעוץ תקשורת ויחסי ציבור לחברות גדולות במשק + תחקירן חדשות</strong>
+              <span>ניסיון בהחזקת מסר, עבודה עם גופים גדולים והבנה איך סיפור נבנה ומתפשט.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="kicker">Public Presence</div>
+          <h3>נוכחות ציבורית ודיגיטלית</h3>
+
+          <div class="social-grid">
+            <a class="social-card" href="https://www.tiktok.com/@eladrothbaum12" target="_blank" rel="noopener noreferrer">
+              <div class="social-top">
+                <strong>TikTok</strong>
+                <p>
+                  ניתוחים, עמדות ותוכן פוליטי לקהל של אלפי עוקבים. מקום שממחיש חשיבה, חדות ויכולת לפשט מסרים מורכבים.
+                </p>
+              </div>
+              <div class="social-link">למעבר לטיקטוק →</div>
+            </a>
+
+            <a class="social-card" href="https://www.instagram.com/eladrothbaum/" target="_blank" rel="noopener noreferrer">
+              <div class="social-top">
+                <strong>Instagram</strong>
+                <p>
+                  נוכחות אישית וציבורית שמחברת בין תקשורת, הופעה, מסר והבנה של זירה משתנה.
+                </p>
+              </div>
+              <div class="social-link">למעבר לאינסטגרם →</div>
+            </a>
+          </div>
+
+          <p style="margin-top:16px;">
+            מעבר לניסיון המקצועי, אני פעיל גם בזירה הדיגיטלית עצמה — לא כדי “לעשות סושיאל”, אלא כדי להבין איך שיח ציבורי נבנה, זז ומשפיע בזמן אמת.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gallery-section">
+      <div class="section-head">
+        <div class="kicker">Video Presence</div>
+        <h2>גלריית נוכחות</h2>
+        <p>
+          כרגע שמתי לך שלושה כרטיסים חזקים שמובילים לפרופיל הטיקטוק שלך. אחר כך נוכל להחליף כל אחד מהם ללינק של סרטון ספציפי שלך, עם תמונה ייעודית וטקסט מותאם.
+        </p>
+      </div>
+
+      <div class="video-grid">
+        <a class="video-card" href="https://www.tiktok.com/@eladrothbaum12" target="_blank" rel="noopener noreferrer">
+          <img src="image1.jpeg" alt="אלעד רוטבאום טיקטוק" />
+          <div class="video-content">
+            <div class="video-tag">TikTok Analysis</div>
+            <h3>ניתוח פוליטי חד</h3>
+            <p>קריאה של מהלכים, שיח ציבורי והבנת מה באמת קורה מאחורי המסר.</p>
+            <span class="video-link">צפה בפרופיל →</span>
+          </div>
+        </a>
+
+        <a class="video-card" href="https://www.tiktok.com/@eladrothbaum12" target="_blank" rel="noopener noreferrer">
+          <img src="image2.jpeg" alt="אלעד רוטבאום ניתוח תקשורתי" />
+          <div class="video-content">
+            <div class="video-tag">Media Reading</div>
+            <h3>תקשורת, כותרות ומסגור</h3>
+            <p>איך משפט אחד הופך לסיפור, ואיך מונעים מהזירה לברוח למקום הלא נכון.</p>
+            <span class="video-link">צפה בפרופיל →</span>
+          </div>
+        </a>
+
+        <a class="video-card" href="https://www.instagram.com/eladrothbaum/" target="_blank" rel="noopener noreferrer">
+          <img src="image3.jpeg" alt="אלעד רוטבאום הופעה ציבורית" />
+          <div class="video-content">
+            <div class="video-tag">Public Presence</div>
+            <h3>נוכחות, הופעה ואמינות</h3>
+            <p>לא רק מה אומרים — אלא איך נראים, איך נשמעים, ואיך מחזיקים עמדה.</p>
+            <span class="video-link">לאינסטגרם →</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="cta-box">
+        <div class="kicker">Contact</div>
+        <h2>אם אתה כבר בזירה — כדאי שתשלוט בה.</h2>
+        <p>
+          אם אתה איש ציבור, פוליטיקאי או דמות שנמצאת בחשיפה ציבורית, ואתה צריך חשיבה חדה לפני פוסט, לפני ריאיון או בזמן רגיש — זה בדיוק המקום שבו עבודה אסטרטגית משנה תוצאה.
+        </p>
+
+        <div class="cta-actions">
+          <a class="btn btn-gold" href="mailto:eladrothbaum@gmail.com">שלח מייל</a>
+          <a class="btn btn-ghost" href="https://www.tiktok.com/@eladrothbaum12" target="_blank" rel="noopener noreferrer">TikTok</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/eladrothbaum/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+
+        <div class="footer-note">eladrothbaum@gmail.com</div>
+      </div>
+    </section>
   </div>
-
-  <!-- SOLUTION -->
-  <div class="section">
-    <h2>מה אני עושה</h2>
-    <p>
-      אני עובד עם פוליטיקאים ואנשי ציבור על קבלת החלטות תקשורתיות.
-    </p>
-    <p>
-      מה להגיד. איך להגיד. ומתי.
-    </p>
-    <p>
-      לא ניהול עמודים.  
-      לא טרנדים.  
-      שליטה.
-    </p>
-  </div>
-
-  <!-- SERVICES -->
-  <div class="section">
-    <h2>שירותים</h2>
-    <p>דפי מסרים — קו ברור ועקבי</p>
-    <p>ניסוח ושכתוב — לפני פרסום</p>
-    <p>הכנה לראיונות — שאלות ותשובות</p>
-    <p>ניטור תקשורתי — הבנת השיח והמשמעות</p>
-    <p>תגובה בזמן אמת — כשאין מקום לטעות</p>
-  </div>
-
-  <!-- BACKGROUND -->
-  <div class="section">
-    <h2>רקע</h2>
-    <p>
-      עיתונאי בעיתון במחנה ודובר צה"ל.  
-      תואר ראשון בממשל, דיפלומטיה ואסטרטגיה — אוניברסיטת רייכמן.
-    </p>
-    <p>
-      עוזר דובר בוועדת הכספים של הכנסת.  
-      לקחתי חלק בקמפיינים של פוליטיקאים וראשי ערים.
-    </p>
-    <p>
-      ייעוץ תקשורת ויחסי ציבור לחברות גדולות במשק.  
-      תחקירן חדשות.
-    </p>
-    <p>
-      יוצר תוכן פוליטי עם אלפי עוקבים — ניתוחים, מסרים והשפעה.
-    </p>
-  </div>
-
-  <!-- WHY -->
-  <div class="section">
-    <h2>למה לעבוד איתי</h2>
-    <p>
-      אני מגיע מהמערכת — לא מהצד.
-    </p>
-    <p>
-      מבין תקשורת, פוליטיקה ותדמית — מבפנים.
-    </p>
-    <p>
-      בזירה הזו, כל מילה קובעת.
-    </p>
-  </div>
-
-  <!-- CTA -->
-  <div class="cta">
-    <button onclick="window.location.href='https://wa.me/972XXXXXXXXX'">
-      דברו איתי
-    </button>
-
-    <div class="links">
-      <a href="https://www.tiktok.com/@eladrothbaum12" target="_blank">TikTok</a>
-      <a href="https://www.instagram.com/eladrothbaum/" target="_blank">Instagram</a>
-    </div>
-  </div>
-
-</div>
-
 </body>
 </html>
